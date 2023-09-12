@@ -1,6 +1,6 @@
 package catrine.dev.smarthouse.data.remotedatasource
 
-import catrine.dev.smarthouse.data.Camera
+import catrine.dev.smarthouse.model.Camera
 
 interface CameraDataSource {
 

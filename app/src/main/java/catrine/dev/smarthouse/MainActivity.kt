@@ -3,6 +3,7 @@ package catrine.dev.smarthouse
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -30,9 +31,11 @@ import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
 import catrine.dev.smarthouse.FontCirce.fontFamily
 import com.example.smarthouse.R
-import catrine.dev.smarthouse.data.Camera
-import catrine.dev.smarthouse.data.Door
+import catrine.dev.smarthouse.model.Camera
+import catrine.dev.smarthouse.model.Door
 import catrine.dev.smarthouse.ui.theme.SmartHouseTheme
+import catrine.dev.smarthouse.viewmodels.CamerasViewModel
+import catrine.dev.smarthouse.viewmodels.DoorsViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
@@ -48,14 +51,11 @@ object FontCirce {
     val fontFamily = FontFamily(Font(googleFont = fontName, fontProvider = fontProvider))
 }
 class MainActivity : ComponentActivity() {
+    private val camerasViewModel : CamerasViewModel by viewModels<CamerasViewModel>()
+    private val doorsViewModel: DoorsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        val config = RealmConfiguration.create(schema = setOf(Camera::class, Door::class))
-        val realm: Realm = Realm.open(config)
-
-
-
 
         setContent {
             SmartHouseTheme {
