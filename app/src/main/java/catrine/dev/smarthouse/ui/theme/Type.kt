@@ -5,11 +5,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.smarthouse.R
+
+val circe = FontFamily(androidx.compose.ui.text.font.Font(R.font.circe))
 
 // Set of Material typography styles to start with
 val Typography = Typography(
         bodyLarge = TextStyle(
-                fontFamily = FontFamily.Default,
+                fontFamily = circe,
                 fontWeight = FontWeight.Normal,
                 fontSize = 16.sp,
                 lineHeight = 24.sp,

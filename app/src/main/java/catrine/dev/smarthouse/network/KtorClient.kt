@@ -13,48 +13,37 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
-
 import kotlinx.serialization.json.Json
 
 
 object KtorClient {
 
-    //Configure the HttpCLient
     @OptIn(ExperimentalSerializationApi::class)
-    val client = HttpClient(Android) {
+    val client
+        get() = HttpClient(Android) {
+            install(Logging) {
+                level = LogLevel.ALL
+            }
 
-        // For Logging
-        install(Logging) {
-            level = LogLevel.ALL
+            install(HttpTimeout) {
+                requestTimeoutMillis = 15000L
+                connectTimeoutMillis = 15000L
+                socketTimeoutMillis = 15000L
+            }
+
+            install(ContentNegotiation) {
+                json(
+                    Json {
+                        ignoreUnknownKeys = true
+                        prettyPrint = true
+                        isLenient = true
+                        explicitNulls = false
+                    })
+            }
+
+            install(DefaultRequest) {
+                header(HttpHeaders.ContentType, ContentType.Application.Json)
+                accept(ContentType.Application.Json)
+            }
         }
-
-        // Timeout plugin
-        install(HttpTimeout) {
-            requestTimeoutMillis = 15000L
-            connectTimeoutMillis = 15000L
-            socketTimeoutMillis = 15000L
-        }
-
-        // JSON Response properties
-        install(ContentNegotiation) {
-            json(
-                Json {
-                    ignoreUnknownKeys = true
-                    prettyPrint = true
-                    isLenient = true
-                    explicitNulls = false
-                })
-
-        }
-
-        // Default request for POST, PUT, DELETE,etc...
-        install(DefaultRequest) {
-            header(HttpHeaders.ContentType, ContentType.Application.Json)
-            //add this accept() for accept Json Body or Raw Json as Request Body
-            accept(ContentType.Application.Json)
-        }
-
-    }
-
-
 }
