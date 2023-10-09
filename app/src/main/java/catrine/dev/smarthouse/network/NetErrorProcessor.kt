@@ -8,16 +8,16 @@ import io.ktor.client.plugins.ServerResponseException
 class NetErrorProcessor {
     companion object {
         fun processError(e: Exception) {
-            when {
-                e is RedirectResponseException -> {
+            when (e) {
+                is RedirectResponseException -> {
                     Log.e("NetApi", "3XX Error: ${e.message}")
                 }
 
-                e is ClientRequestException -> {
+                is ClientRequestException -> {
                     Log.e("NetApi", "4XX Error: ${e.message}")
                 }
 
-                e is ServerResponseException -> {
+                is ServerResponseException -> {
                     Log.e("NetApi", "5XX Error: ${e.message}")
 
                 }

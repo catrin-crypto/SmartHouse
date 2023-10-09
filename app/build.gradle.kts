@@ -6,8 +6,6 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization")
 }
 
-
-
 android {
     namespace = "com.example.smarthouse"
     compileSdk = 34
@@ -51,13 +49,12 @@ android {
     }
 }
 
-
 dependencies {
-    implementation("androidx.compose.ui:ui-text-google-fonts:1.5.0")
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.5.1")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     implementation ("io.realm.kotlin:library-base:1.11.0")
     implementation ("io.realm.kotlin:library-sync:1.11.0")// If using Device Sync
-    implementation ("io.realm.")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3") // If using coroutines with the SDK
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
@@ -78,10 +75,11 @@ dependencies {
     // Content negotiation
     implementation ("io.ktor:ktor-client-content-negotiation:$ktorVersion")
 
+    implementation ("androidx.compose.runtime:runtime-livedata:1.5.1")
 
-    var serialization_version = "1.3.0"
+    val serializationVersion = "1.3.0"
     // Serialization plugin support
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")

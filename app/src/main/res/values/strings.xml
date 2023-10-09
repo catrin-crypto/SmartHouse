@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SmartHouse</string>
+    <string name="tab_name_cameras">Камеры</string>
+    <string name="tab_name_doors">Двери</string>
+    <string name="image_description">image description</string>
+    <string name="appbar_title">Мой дом</string>
+    <string name="edit_door_name_dialog_title">Введите название двери</string>
+    <string name="edit_name_dialog_dismiss_btn">отмена</string>
+    <string name="edit_name_dialog_apply_btn">применить</string>
+    <string name="edit_camera_name_dialog_title">Введите название камеры</string>
 </resources>

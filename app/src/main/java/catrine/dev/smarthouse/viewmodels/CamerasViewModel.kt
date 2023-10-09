@@ -6,16 +6,27 @@ import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 
 class CamerasViewModel : SmartHouseViewModel<Camera>() {
-    private val cameraDataSource = CameraDataSourceImpl()
+    override fun getRealmObjectClassName() = Camera::class
     override val realm: Realm
         get() = camerasRealm
-    private val camerasRealm: Realm = Realm.open(
-        RealmConfiguration.create(
+    override val remoteRepository = CameraDataSourceImpl()
+
+    private val camerasRealm: Realm
+
+    init {
+        val config = RealmConfiguration.create(
             schema = setOf(Camera::class)
         )
-    )
+        camerasRealm = Realm.open(config)
 
+        loadOnStart()
+    }
 
-
-
+    override fun updateName(id: Int, name: String) {
+        val item = realm.query(
+            Camera::class,
+            "id == $id"
+        ).first().find()
+        item?.name = name
+    }
 }
